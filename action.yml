@@ -1,8 +1,8 @@
-name: "Deploy to Cloudflare Workers with Wrangler"
+name: "Deploy to Cloudflare Workers with Varlock Wrangler"
 branding:
   icon: "upload-cloud"
   color: "orange"
-description: "Deploy your Cloudflare projects from GitHub using Wrangler"
+description: "Deploy Cloudflare Workers with varlock-wrangler"
 runs:
   # Possible values: https://github.com/actions/runner/blob/main/src/Runner.Common/Util/NodeUtil.cs#L9
   using: "node24"
@@ -15,19 +15,22 @@ inputs:
     description: "Your Cloudflare Account ID"
     required: false
   quiet:
-    description: "Supresses output from Wrangler commands, defaults to `false`"
+    description: "Suppresses output from varlock-wrangler commands, defaults to `false`"
     required: false
     default: "false"
   environment:
     description: "The environment you'd like to deploy your Workers project to - must be defined in wrangler.toml"
   workingDirectory:
-    description: "The relative path which Wrangler commands should be run from"
+    description: "The relative path which varlock-wrangler commands should be run from"
+    required: false
+  varlockVersion:
+    description: "The version of varlock you'd like to install"
+    required: false
+  varlockCloudflareIntegrationVersion:
+    description: "The version of @varlock/cloudflare-integration you'd like to install"
     required: false
   wranglerVersion:
-    description: "The version of Wrangler you'd like to use to deploy your Workers project"
-    required: false
-  secrets:
-    description: "A string of environment variable names, separated by newlines. These will be bound to your Worker as Secrets and must match the names of environment variables declared in `env` of this workflow."
+    description: "The version of Wrangler to install as the varlock-wrangler peer dependency"
     required: false
   preCommands:
     description: "Commands to execute before deploying the Workers project"
@@ -36,22 +39,19 @@ inputs:
     description: "Commands to execute after deploying the Workers project"
     required: false
   command:
-    description: 'The Wrangler command (along with any arguments) you wish to run. Multiple Wrangler commands can be run by separating each command with a newline. Defaults to `"deploy"`.'
-    required: false
-  vars:
-    description: "A string of environment variable names, separated by newlines. These will be bound to your Worker using the values of matching environment variables declared in `env` of this workflow."
+    description: 'The varlock-wrangler command (along with any arguments) you wish to run. Multiple commands can be run by separating each command with a newline. Defaults to `"deploy"`.'
     required: false
   packageManager:
-    description: "The package manager you'd like to use to install and run wrangler. If not specified, the preferred package manager will be inferred based on the presence of a lockfile or fallback to using npm if no lockfile is found. Valid values are `npm` | `pnpm` | `yarn` | `bun`."
+    description: "The package manager you'd like to use to install and run varlock-wrangler. If not specified, the preferred package manager will be inferred based on the presence of a lockfile or fallback to using npm if no lockfile is found. Valid values are `npm` | `pnpm` | `yarn` | `bun`."
     required: false
   gitHubToken:
     description: "GitHub Token"
     required: false
 outputs:
   command-output:
-    description: "The output of the Wrangler command (comes from stdout)"
+    description: "The output of the varlock-wrangler command (comes from stdout)"
   command-stderr:
-    description: "The error output of the Wrangler command (comes from stderr)"
+    description: "The error output of the varlock-wrangler command (comes from stderr)"
   deployment-url:
     description: "If the command was a Workers or Pages deployment, this will be the URL of the deployment"
   pages-deployment-alias-url:

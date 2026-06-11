@@ -1,4 +1,5 @@
-dist
+dist/*
+!dist/index.mjs
 .idea
 .vscode
 
@@ -92,4 +93,3 @@ web_modules/
 
 # Optional stylelint cache
 .stylelintcache
-

@@ -8,13 +8,12 @@ export function getTestConfig({
 	return Object.assign(
 		{
 			WRANGLER_VERSION: "4.72.0",
-			didUserProvideWranglerVersion: false,
-			secrets: [],
+			VARLOCK_VERSION: "latest",
+			VARLOCK_CLOUDFLARE_INTEGRATION_VERSION: "latest",
 			workingDirectory: "/src/test/fixtures",
 			CLOUDFLARE_API_TOKEN: "foo",
 			CLOUDFLARE_ACCOUNT_ID: "bar",
 			ENVIRONMENT: "dev",
-			VARS: [],
 			COMMANDS: [],
 			QUIET_MODE: false,
 			PACKAGE_MANAGER: "npm",

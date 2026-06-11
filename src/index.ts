@@ -6,19 +6,22 @@ import { checkWorkingDirectory } from "./utils";
 import { main, WranglerActionConfig } from "./wranglerAction";
 
 const DEFAULT_WRANGLER_VERSION = "4";
+const DEFAULT_VARLOCK_VERSION = "latest";
+const DEFAULT_VARLOCK_CLOUDFLARE_INTEGRATION_VERSION = "latest";
 
 /**
  * A configuration object that contains all the inputs & immutable state for the action.
  */
 const config: WranglerActionConfig = {
 	WRANGLER_VERSION: getInput("wranglerVersion") || DEFAULT_WRANGLER_VERSION,
-	didUserProvideWranglerVersion: Boolean(getInput("wranglerVersion")),
-	secrets: getMultilineInput("secrets"),
+	VARLOCK_VERSION: getInput("varlockVersion") || DEFAULT_VARLOCK_VERSION,
+	VARLOCK_CLOUDFLARE_INTEGRATION_VERSION:
+		getInput("varlockCloudflareIntegrationVersion") ||
+		DEFAULT_VARLOCK_CLOUDFLARE_INTEGRATION_VERSION,
 	workingDirectory: checkWorkingDirectory(getInput("workingDirectory")),
 	CLOUDFLARE_API_TOKEN: getInput("apiToken"),
 	CLOUDFLARE_ACCOUNT_ID: getInput("accountId"),
 	ENVIRONMENT: getInput("environment"),
-	VARS: getMultilineInput("vars"),
 	COMMANDS: getMultilineInput("command"),
 	QUIET_MODE: getBooleanInput("quiet"),
 	PACKAGE_MANAGER: getInput("packageManager"),
