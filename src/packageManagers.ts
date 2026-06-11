@@ -35,21 +35,34 @@ type PackageManagerValue = keyof typeof PACKAGE_MANAGERS;
 function detectPackageManager(
 	workingDirectory = ".",
 ): PackageManagerValue | null {
-	if (existsSync(path.join(workingDirectory, "package-lock.json"))) {
-		return "npm";
+	let currentDirectory = path.resolve(workingDirectory);
+
+	while (true) {
+		if (existsSync(path.join(currentDirectory, "package-lock.json"))) {
+			return "npm";
+		}
+		if (existsSync(path.join(currentDirectory, "yarn.lock"))) {
+			return "yarn";
+		}
+		if (existsSync(path.join(currentDirectory, "pnpm-lock.yaml"))) {
+			return "pnpm";
+		}
+		if (
+			existsSync(path.join(currentDirectory, "bun.lockb")) ||
+			existsSync(path.join(currentDirectory, "bun.lock"))
+		) {
+			return "bun";
+		}
+
+		const parentDirectory = path.dirname(currentDirectory);
+
+		if (parentDirectory === currentDirectory) {
+			break;
+		}
+
+		currentDirectory = parentDirectory;
 	}
-	if (existsSync(path.join(workingDirectory, "yarn.lock"))) {
-		return "yarn";
-	}
-	if (existsSync(path.join(workingDirectory, "pnpm-lock.yaml"))) {
-		return "pnpm";
-	}
-	if (
-		existsSync(path.join(workingDirectory, "bun.lockb")) ||
-		existsSync(path.join(workingDirectory, "bun.lock"))
-	) {
-		return "bun";
-	}
+
 	return null;
 }
 

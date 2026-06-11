@@ -36214,18 +36214,26 @@ const PACKAGE_MANAGERS = {
     },
 };
 function detectPackageManager(workingDirectory = ".") {
-    if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "package-lock.json"))) {
-        return "npm";
-    }
-    if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "yarn.lock"))) {
-        return "yarn";
-    }
-    if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "pnpm-lock.yaml"))) {
-        return "pnpm";
-    }
-    if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "bun.lockb")) ||
-        (0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "bun.lock"))) {
-        return "bun";
+    let currentDirectory = external_node_path_namespaceObject.resolve(workingDirectory);
+    while (true) {
+        if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "package-lock.json"))) {
+            return "npm";
+        }
+        if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "yarn.lock"))) {
+            return "yarn";
+        }
+        if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "pnpm-lock.yaml"))) {
+            return "pnpm";
+        }
+        if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "bun.lockb")) ||
+            (0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "bun.lock"))) {
+            return "bun";
+        }
+        const parentDirectory = external_node_path_namespaceObject.dirname(currentDirectory);
+        if (parentDirectory === currentDirectory) {
+            break;
+        }
+        currentDirectory = parentDirectory;
     }
     return null;
 }

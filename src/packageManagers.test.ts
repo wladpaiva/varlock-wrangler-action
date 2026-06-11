@@ -79,6 +79,20 @@ describe("getPackageManager", () => {
 			`);
 	});
 
+	test("should use pnpm from a parent workspace lockfile", () => {
+		expect(
+			getPackageManager("", {
+				workingDirectory: "src/test/fixtures/pnpm-workspace/apps/website",
+			}),
+		).toMatchInlineSnapshot(`
+				{
+				  "exec": "pnpm exec",
+				  "execNoInstall": "pnpm exec",
+				  "install": "pnpm add",
+				}
+			`);
+	});
+
 	test("should use bun if no value provided and bun.lockb exists", () => {
 		expect(getPackageManager("", { workingDirectory: "src/test/fixtures/bun" }))
 			.toMatchInlineSnapshot(`
