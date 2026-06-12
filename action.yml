@@ -18,6 +18,10 @@ inputs:
     description: "Suppresses output from varlock-wrangler commands, defaults to `false`"
     required: false
     default: "false"
+  skipInstall:
+    description: "Skip installing varlock, @varlock/cloudflare-integration, and wrangler. Use this when dependencies are already installed by an earlier workflow step."
+    required: false
+    default: "false"
   environment:
     description: "The environment you'd like to deploy your Workers project to - must be defined in wrangler.toml"
   workingDirectory:
@@ -42,7 +46,7 @@ inputs:
     description: 'The varlock-wrangler command (along with any arguments) you wish to run. Multiple commands can be run by separating each command with a newline. Defaults to `"deploy"`.'
     required: false
   packageManager:
-    description: "The package manager you'd like to use to install and run varlock-wrangler. If not specified, the preferred package manager will be inferred based on the presence of a lockfile or fallback to using npm if no lockfile is found. Valid values are `npm` | `pnpm` | `yarn` | `bun`."
+    description: "The package manager you'd like to use to install and run varlock-wrangler. If not specified, the preferred package manager will be inferred based on the presence of a lockfile or fallback to using npm if no lockfile is found. Valid values are `npm` | `pnpm` | `yarn` | `bun` | `vp`."
     required: false
   gitHubToken:
     description: "GitHub Token"

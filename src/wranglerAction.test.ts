@@ -50,6 +50,20 @@ describe("installVarlockWrangler", () => {
 			},
 		);
 	});
+
+	it("skips installing varlock-wrangler and its peer dependencies", async () => {
+		const testConfig = getTestConfig({
+			config: {
+				SKIP_INSTALL: true,
+			},
+		});
+
+		const { exec } = await import("./exec");
+
+		await installVarlockWrangler(testConfig, testPackageManager);
+
+		expect(exec).not.toHaveBeenCalled();
+	});
 });
 
 describe("execCommands", () => {

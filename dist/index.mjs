@@ -36207,6 +36207,11 @@ const PACKAGE_MANAGERS = {
         exec: "pnpm exec",
         execNoInstall: "pnpm exec",
     },
+    vp: {
+        install: "vp install",
+        exec: "vp exec",
+        execNoInstall: "vp exec",
+    },
     bun: {
         install: "bun i",
         exec: "bunx",
@@ -36214,18 +36219,26 @@ const PACKAGE_MANAGERS = {
     },
 };
 function detectPackageManager(workingDirectory = ".") {
-    if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "package-lock.json"))) {
-        return "npm";
-    }
-    if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "yarn.lock"))) {
-        return "yarn";
-    }
-    if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "pnpm-lock.yaml"))) {
-        return "pnpm";
-    }
-    if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "bun.lockb")) ||
-        (0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(workingDirectory, "bun.lock"))) {
-        return "bun";
+    let currentDirectory = external_node_path_namespaceObject.resolve(workingDirectory);
+    while (true) {
+        if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "package-lock.json"))) {
+            return "npm";
+        }
+        if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "yarn.lock"))) {
+            return "yarn";
+        }
+        if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "pnpm-lock.yaml"))) {
+            return "pnpm";
+        }
+        if ((0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "bun.lockb")) ||
+            (0,external_node_fs_namespaceObject.existsSync)(external_node_path_namespaceObject.join(currentDirectory, "bun.lock"))) {
+            return "bun";
+        }
+        const parentDirectory = external_node_path_namespaceObject.dirname(currentDirectory);
+        if (parentDirectory === currentDirectory) {
+            break;
+        }
+        currentDirectory = parentDirectory;
     }
     return null;
 }
@@ -40845,6 +40858,7 @@ const wranglerActionConfig = objectType({
     ENVIRONMENT: stringType(),
     COMMANDS: arrayType(stringType()),
     QUIET_MODE: booleanType(),
+    SKIP_INSTALL: booleanType(),
     PACKAGE_MANAGER: stringType(),
     WRANGLER_OUTPUT_DIR: stringType(),
     GITHUB_TOKEN: stringType(),
@@ -40875,6 +40889,10 @@ async function main(config, packageManager) {
     }
 }
 async function installVarlockWrangler(config, packageManager) {
+    if (config["SKIP_INSTALL"]) {
+        info(config, "⏭️ Skipping Varlock Wrangler install", true);
+        return;
+    }
     startGroup(config, "📥 Installing Varlock Wrangler");
     try {
         await (0,exec.exec)(packageManager.install, [
@@ -40969,7 +40987,7 @@ async function wranglerCommands(config, packageManager) {
 
 
 
-const DEFAULT_WRANGLER_VERSION = "4";
+const DEFAULT_WRANGLER_VERSION = "^4";
 const DEFAULT_VARLOCK_VERSION = "latest";
 const DEFAULT_VARLOCK_CLOUDFLARE_INTEGRATION_VERSION = "latest";
 /**
@@ -40986,6 +41004,7 @@ const config = {
     ENVIRONMENT: (0,core.getInput)("environment"),
     COMMANDS: (0,core.getMultilineInput)("command"),
     QUIET_MODE: (0,core.getBooleanInput)("quiet"),
+    SKIP_INSTALL: (0,core.getBooleanInput)("skipInstall"),
     PACKAGE_MANAGER: (0,core.getInput)("packageManager"),
     WRANGLER_OUTPUT_DIR: `${(0,external_path_.join)((0,external_os_.tmpdir)(), `wranglerArtifacts-${crypto.randomUUID()}`)}`,
     GITHUB_TOKEN: (0,core.getInput)("gitHubToken", { required: false }),

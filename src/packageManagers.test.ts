@@ -42,6 +42,16 @@ describe("getPackageManager", () => {
 				  "install": "bun i",
 				}
 			`);
+
+		expect(
+			getPackageManager("vp", { workingDirectory: "src/test/fixtures/npm" }),
+		).toMatchInlineSnapshot(`
+				{
+				  "exec": "vp exec",
+				  "execNoInstall": "vp exec",
+				  "install": "vp install",
+				}
+			`);
 	});
 
 	test("should use npm if no value provided and package-lock.json exists", () => {
@@ -70,6 +80,20 @@ describe("getPackageManager", () => {
 	test("should use pnpm if no value provided and pnpm-lock.yaml exists", () => {
 		expect(
 			getPackageManager("", { workingDirectory: "src/test/fixtures/pnpm" }),
+		).toMatchInlineSnapshot(`
+				{
+				  "exec": "pnpm exec",
+				  "execNoInstall": "pnpm exec",
+				  "install": "pnpm add",
+				}
+			`);
+	});
+
+	test("should use pnpm from a parent workspace lockfile", () => {
+		expect(
+			getPackageManager("", {
+				workingDirectory: "src/test/fixtures/pnpm-workspace/apps/website",
+			}),
 		).toMatchInlineSnapshot(`
 				{
 				  "exec": "pnpm exec",
