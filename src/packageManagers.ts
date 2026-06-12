@@ -23,6 +23,11 @@ const PACKAGE_MANAGERS = {
 		exec: "pnpm exec",
 		execNoInstall: "pnpm exec",
 	},
+	vp: {
+		install: "vp install",
+		exec: "vp exec",
+		execNoInstall: "vp exec",
+	},
 	bun: {
 		install: "bun i",
 		exec: "bunx",

@@ -42,6 +42,16 @@ describe("getPackageManager", () => {
 				  "install": "bun i",
 				}
 			`);
+
+		expect(
+			getPackageManager("vp", { workingDirectory: "src/test/fixtures/npm" }),
+		).toMatchInlineSnapshot(`
+				{
+				  "exec": "vp exec",
+				  "execNoInstall": "vp exec",
+				  "install": "vp install",
+				}
+			`);
 	});
 
 	test("should use npm if no value provided and package-lock.json exists", () => {
