@@ -16,6 +16,7 @@ export function getTestConfig({
 			ENVIRONMENT: "dev",
 			COMMANDS: [],
 			QUIET_MODE: false,
+			SKIP_INSTALL: false,
 			PACKAGE_MANAGER: "npm",
 			WRANGLER_OUTPUT_DIR: "/tmp/wranglerArtifacts",
 			GITHUB_TOKEN: "xxxxyy23213123132131",

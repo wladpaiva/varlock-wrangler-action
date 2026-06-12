@@ -22,6 +22,7 @@ export const wranglerActionConfig = z.object({
 	ENVIRONMENT: z.string(),
 	COMMANDS: z.array(z.string()),
 	QUIET_MODE: z.boolean(),
+	SKIP_INSTALL: z.boolean(),
 	PACKAGE_MANAGER: z.string(),
 	WRANGLER_OUTPUT_DIR: z.string(),
 	GITHUB_TOKEN: z.string(),
@@ -72,6 +73,11 @@ async function installVarlockWrangler(
 	config: WranglerActionConfig,
 	packageManager: PackageManager,
 ): Promise<void> {
+	if (config["SKIP_INSTALL"]) {
+		info(config, "⏭️ Skipping Varlock Wrangler install", true);
+		return;
+	}
+
 	startGroup(config, "📥 Installing Varlock Wrangler");
 	try {
 		await exec(

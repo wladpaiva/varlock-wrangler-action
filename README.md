@@ -111,21 +111,22 @@ Worker versions are supported:
 
 ## Inputs
 
-| Input                                 | Required | Description                                                                                                                   |
-| ------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `apiToken`                            | No       | Cloudflare API token. Set as `CLOUDFLARE_API_TOKEN` for Wrangler.                                                             |
-| `accountId`                           | No       | Cloudflare account ID. Set as `CLOUDFLARE_ACCOUNT_ID` for Wrangler.                                                           |
-| `command`                             | No       | Command arguments passed to `varlock-wrangler`. Defaults to `deploy`.                                                         |
-| `environment`                         | No       | Adds `--env <environment>` when the command does not already include `--env`.                                                 |
-| `workingDirectory`                    | No       | Directory where dependencies are installed and commands are run.                                                              |
-| `varlockVersion`                      | No       | Version of `varlock` to install. Defaults to `latest`.                                                                        |
-| `varlockCloudflareIntegrationVersion` | No       | Version of `@varlock/cloudflare-integration` to install. Defaults to `latest`.                                                |
-| `wranglerVersion`                     | No       | Version of `wrangler` to install as the wrapper peer dependency. Defaults to `^4`.                                            |
-| `packageManager`                      | No       | Package manager to use: `npm`, `pnpm`, `yarn`, or `bun`. Auto-detected from lockfiles when omitted.                           |
-| `preCommands`                         | No       | Shell commands to run before the Varlock Wrangler command. Lines starting with `wrangler` are run through `varlock-wrangler`. |
-| `postCommands`                        | No       | Shell commands to run after the Varlock Wrangler command. Lines starting with `wrangler` are run through `varlock-wrangler`.  |
-| `quiet`                               | No       | Suppress command output. Defaults to `false`.                                                                                 |
-| `gitHubToken`                         | No       | GitHub token used for Pages deployment metadata and job summaries.                                                            |
+| Input                                 | Required | Description                                                                                                                     |
+| ------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `apiToken`                            | No       | Cloudflare API token. Set as `CLOUDFLARE_API_TOKEN` for Wrangler.                                                               |
+| `accountId`                           | No       | Cloudflare account ID. Set as `CLOUDFLARE_ACCOUNT_ID` for Wrangler.                                                             |
+| `command`                             | No       | Command arguments passed to `varlock-wrangler`. Defaults to `deploy`.                                                           |
+| `environment`                         | No       | Adds `--env <environment>` when the command does not already include `--env`.                                                   |
+| `workingDirectory`                    | No       | Directory where dependencies are installed and commands are run.                                                                |
+| `varlockVersion`                      | No       | Version of `varlock` to install. Defaults to `latest`.                                                                          |
+| `varlockCloudflareIntegrationVersion` | No       | Version of `@varlock/cloudflare-integration` to install. Defaults to `latest`.                                                  |
+| `wranglerVersion`                     | No       | Version of `wrangler` to install as the wrapper peer dependency. Defaults to `^4`.                                              |
+| `packageManager`                      | No       | Package manager to use: `npm`, `pnpm`, `yarn`, `bun`, or `vp`. Auto-detected from lockfiles when omitted.                       |
+| `skipInstall`                         | No       | Skip installing Varlock/Wrangler dependencies when they are already installed by an earlier workflow step. Defaults to `false`. |
+| `preCommands`                         | No       | Shell commands to run before the Varlock Wrangler command. Lines starting with `wrangler` are run through `varlock-wrangler`.   |
+| `postCommands`                        | No       | Shell commands to run after the Varlock Wrangler command. Lines starting with `wrangler` are run through `varlock-wrangler`.    |
+| `quiet`                               | No       | Suppress command output. Defaults to `false`.                                                                                   |
+| `gitHubToken`                         | No       | GitHub token used for Pages deployment metadata and job summaries.                                                              |
 
 ## Outputs
 

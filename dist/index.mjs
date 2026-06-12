@@ -40858,6 +40858,7 @@ const wranglerActionConfig = objectType({
     ENVIRONMENT: stringType(),
     COMMANDS: arrayType(stringType()),
     QUIET_MODE: booleanType(),
+    SKIP_INSTALL: booleanType(),
     PACKAGE_MANAGER: stringType(),
     WRANGLER_OUTPUT_DIR: stringType(),
     GITHUB_TOKEN: stringType(),
@@ -40888,6 +40889,10 @@ async function main(config, packageManager) {
     }
 }
 async function installVarlockWrangler(config, packageManager) {
+    if (config["SKIP_INSTALL"]) {
+        info(config, "⏭️ Skipping Varlock Wrangler install", true);
+        return;
+    }
     startGroup(config, "📥 Installing Varlock Wrangler");
     try {
         await (0,exec.exec)(packageManager.install, [
@@ -40999,6 +41004,7 @@ const config = {
     ENVIRONMENT: (0,core.getInput)("environment"),
     COMMANDS: (0,core.getMultilineInput)("command"),
     QUIET_MODE: (0,core.getBooleanInput)("quiet"),
+    SKIP_INSTALL: (0,core.getBooleanInput)("skipInstall"),
     PACKAGE_MANAGER: (0,core.getInput)("packageManager"),
     WRANGLER_OUTPUT_DIR: `${(0,external_path_.join)((0,external_os_.tmpdir)(), `wranglerArtifacts-${crypto.randomUUID()}`)}`,
     GITHUB_TOKEN: (0,core.getInput)("gitHubToken", { required: false }),

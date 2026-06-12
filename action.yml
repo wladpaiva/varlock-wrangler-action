@@ -18,6 +18,10 @@ inputs:
     description: "Suppresses output from varlock-wrangler commands, defaults to `false`"
     required: false
     default: "false"
+  skipInstall:
+    description: "Skip installing varlock, @varlock/cloudflare-integration, and wrangler. Use this when dependencies are already installed by an earlier workflow step."
+    required: false
+    default: "false"
   environment:
     description: "The environment you'd like to deploy your Workers project to - must be defined in wrangler.toml"
   workingDirectory:

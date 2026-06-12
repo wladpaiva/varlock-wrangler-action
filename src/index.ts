@@ -24,6 +24,7 @@ const config: WranglerActionConfig = {
 	ENVIRONMENT: getInput("environment"),
 	COMMANDS: getMultilineInput("command"),
 	QUIET_MODE: getBooleanInput("quiet"),
+	SKIP_INSTALL: getBooleanInput("skipInstall"),
 	PACKAGE_MANAGER: getInput("packageManager"),
 	WRANGLER_OUTPUT_DIR: `${join(
 		tmpdir(),
