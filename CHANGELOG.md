@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.2
+
+### Patch Changes
+
+- Expose Worker version preview alias URLs through `pages-deployment-alias-url`.
+
 ## 4.0.1
 
 ### Patch Changes

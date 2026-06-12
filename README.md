@@ -135,7 +135,7 @@ Worker versions are supported:
 | `command-output`             | stdout from the last `varlock-wrangler` command.          |
 | `command-stderr`             | stderr from the last `varlock-wrangler` command.          |
 | `deployment-url`             | Worker or Pages deployment URL when Wrangler reports one. |
-| `pages-deployment-alias-url` | Pages deployment alias URL when available.                |
+| `pages-deployment-alias-url` | Pages or Worker version preview alias URL when available. |
 | `pages-deployment-id`        | Pages deployment ID when available.                       |
 | `pages-environment`          | Pages deployment environment when available.              |
 

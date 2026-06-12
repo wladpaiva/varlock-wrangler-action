@@ -1,6 +1,6 @@
 {
 	"name": "varlock-wrangler-action",
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"description": "GitHub Action to deploy Cloudflare Workers with varlock-wrangler.",
 	"author": "wladpaiva",
 	"license": "MIT OR Apache-2.0",
