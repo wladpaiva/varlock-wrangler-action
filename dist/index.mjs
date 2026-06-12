@@ -40578,6 +40578,8 @@ const OutputEntryVersionUpload = OutputEntryBase.merge(objectType({
     type: literalType("version-upload"),
     /** The preview URL associated with this version upload */
     preview_url: stringType().optional(),
+    /** The preview alias URL associated with this version upload */
+    preview_alias_url: stringType().optional(),
 }));
 const SupportedOutputEntry = discriminatedUnionType("type", [
     OutputEntryPagesDeployment,
@@ -40795,6 +40797,7 @@ function handleWranglerDeployCommand(config, stdOut) {
 }
 function handleVersionsUploadOutputEntry(versionsOutputEntry) {
     (0,core.setOutput)("deployment-url", versionsOutputEntry.preview_url);
+    (0,core.setOutput)("pages-deployment-alias-url", versionsOutputEntry.preview_alias_url);
 }
 /**
  * If no wrangler output file found, log a message stating deployment-url will be unavailable for output.

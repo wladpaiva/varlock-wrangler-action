@@ -112,6 +112,10 @@ function handleVersionsUploadOutputEntry(
 	versionsOutputEntry: OutputEntryVersionUpload,
 ) {
 	setOutput("deployment-url", versionsOutputEntry.preview_url);
+	setOutput(
+		"pages-deployment-alias-url",
+		versionsOutputEntry.preview_alias_url,
+	);
 }
 
 /**
