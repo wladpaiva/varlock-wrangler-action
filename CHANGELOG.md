@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.1
+
+### Patch Changes
+
+- [#1](https://github.com/wladpaiva/varlock-wrangler-action/pull/1) [`cb07a86`](https://github.com/wladpaiva/varlock-wrangler-action/commit/cb07a860f400fc7b8a56b63271797fa7a47908cb) Thanks [@wladpaiva](https://github.com/wladpaiva)! - Detect package managers from parent workspace lockfiles, support Vite+ as a package manager, and allow workflows to skip dependency installation when tool dependencies are already installed.
+
 ## 4.0.0
 
 ### Major Changes
