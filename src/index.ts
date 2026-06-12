@@ -5,7 +5,7 @@ import { getPackageManager } from "./packageManagers";
 import { checkWorkingDirectory } from "./utils";
 import { main, WranglerActionConfig } from "./wranglerAction";
 
-const DEFAULT_WRANGLER_VERSION = "4";
+const DEFAULT_WRANGLER_VERSION = "^4";
 const DEFAULT_VARLOCK_VERSION = "latest";
 const DEFAULT_VARLOCK_CLOUDFLARE_INTEGRATION_VERSION = "latest";
 

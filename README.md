@@ -120,7 +120,7 @@ Worker versions are supported:
 | `workingDirectory`                    | No       | Directory where dependencies are installed and commands are run.                                                              |
 | `varlockVersion`                      | No       | Version of `varlock` to install. Defaults to `latest`.                                                                        |
 | `varlockCloudflareIntegrationVersion` | No       | Version of `@varlock/cloudflare-integration` to install. Defaults to `latest`.                                                |
-| `wranglerVersion`                     | No       | Version of `wrangler` to install as the wrapper peer dependency. Defaults to `4`.                                             |
+| `wranglerVersion`                     | No       | Version of `wrangler` to install as the wrapper peer dependency. Defaults to `^4`.                                            |
 | `packageManager`                      | No       | Package manager to use: `npm`, `pnpm`, `yarn`, or `bun`. Auto-detected from lockfiles when omitted.                           |
 | `preCommands`                         | No       | Shell commands to run before the Varlock Wrangler command. Lines starting with `wrangler` are run through `varlock-wrangler`. |
 | `postCommands`                        | No       | Shell commands to run after the Varlock Wrangler command. Lines starting with `wrangler` are run through `varlock-wrangler`.  |
